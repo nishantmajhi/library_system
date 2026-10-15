@@ -1,0 +1,13 @@
+# The library itself. Contains real member names, email addresses and phone
+# numbers once the application has been used, and must never be committed.
+library.db
+library.db-wal
+library.db-shm
+
+# SQLite leaves these beside the database in WAL mode.
+*.db-wal
+*.db-shm
+
+__pycache__/
+*.py[cod]
+.pytest_cache/

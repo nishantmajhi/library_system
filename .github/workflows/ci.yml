@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # tests/original.py reads the pre-cleanup program out of history.
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      # A third of the checks open real Tk windows, so they run under a
+      # virtual display rather than being skipped with --no-gui.
+      - run: xvfb-run -a python tests/run.py
